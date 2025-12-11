@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Movie Explorer</title>
+  <link rel="stylesheet" href="style.css">
+  <script src="https://cdn.jsdelivr.net/npm/vue@2"></script>
+</head>
+<body>
+
+<div id="app" class="container">
+  <h1>🎬 Movie Explorer</h1>
+  <div class="search-box">
+    <input 
+      v-model="query" 
+      @keyup.enter="searchMovies" 
+      placeholder="Search movies..."
+    />
+    <button @click="searchMovies">Search</button>
+  </div>
+
+  <p v-if="loading" class="loading">Loading...</p>
+  <p v-if="error" class="error">{{ error }}</p>
+
+  <div class="movies">
+    <div v-for="movie in movies" class="movie-card" @click="openMovie(movie.imdbID)">
+      <img :src="movie.Poster" alt="Poster">
+      <h3>{{ movie.Title }}</h3>
+      <p>{{ movie.Year }}</p>
+    </div>
+  </div>
+
+  <div v-if="selectedMovie" class="modal-overlay" @click.self="closeModal">
+  <div class="modal-content">
+    <button class="close-btn" @click="closeModal">✖</button>
+    <img :src="selectedMovie.Poster" class="modal-poster" />
+    <h2>{{ selectedMovie.Title }}</h2>
+    <p><strong>Year:</strong> {{ selectedMovie.Year }}</p>
+    <p><strong>Genre:</strong> {{ selectedMovie.Genre }}</p>
+    <p><strong>Plot:</strong> {{ selectedMovie.Plot }}</p>
+    <p><strong>Actors:</strong> {{ selectedMovie.Actors }}</p>
+    <p><strong>IMDB Rating:</strong> {{ selectedMovie.imdbRating }}</p>
+  </div>
+  </div>
+</div>
+
+<script src="app.js"></script>
+</body>
+</html>
