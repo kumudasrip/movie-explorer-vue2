@@ -34,8 +34,6 @@ Movie Explorer is a simple and interactive web application built using **Vue.js 
 
 ---
 
----
-
 ## 🎨 UI & Styling
 
 - Dark theme interface  
